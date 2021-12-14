@@ -1,9 +1,18 @@
 package util;
 
+import java.util.List;
 import java.util.Map;
 
 public record Vector(int x, int y, int z) {
     public static final Vector ZERO = new Vector(0, 0, 0);
+    public static final Vector UP = new Vector(0, -1, 0);
+    public static final Vector DOWN = new Vector(0, 1, 0);
+    public static final Vector RIGHT = new Vector(1, 0, 0);
+    public static final Vector LEFT = new Vector(-1, 0, 0);
+    public static final List<Vector> ALL_DIR = List.of(UP, DOWN, LEFT, RIGHT);
+    public static final List<Vector> ALL_DIR_WITH_DIAG = List.of(UP, DOWN, LEFT, RIGHT, UP.add(LEFT),
+            UP.add(RIGHT), DOWN.add(LEFT), DOWN.add(RIGHT));
+
 
     public Vector(int x, int y) {
         this(x, y, 0);
@@ -37,12 +46,12 @@ public record Vector(int x, int y, int z) {
         return Math.sqrt(dx * dx + dy * dy + dz * dz);
     }
 
-    public static void printMatrix(Map<Vector, Integer> data) {
+    public static void printMatrix(Map<Vector, Boolean> data, String present, String absent) {
         var maxX = data.keySet().stream().map(Vector::x).mapToInt(Integer::intValue).max().getAsInt();
         var maxY = data.keySet().stream().map(Vector::y).mapToInt(Integer::intValue).max().getAsInt();
         for (int y = 0; y < maxY + 1; y++) {
             for (int x = 0; x < maxX + 1; x++) {
-                System.out.print(data.getOrDefault(new Vector(x, y), 0));
+                System.out.print(data.getOrDefault(new Vector(x, y), false) ? present : absent);
             }
             System.out.println();
         }

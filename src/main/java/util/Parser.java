@@ -16,4 +16,16 @@ public class Parser {
                     .collect(Collectors.toList());
         }
     }
+
+    public static <A, B> Pair<A, B> splitToPair(String input, String separator, Function<String, A> mapLeft, Function<String, B> mapRight) {
+        String[] split = input.split(separator);
+        return new Pair<>(
+                mapLeft.apply(split[0]),
+                mapRight.apply(split[1])
+        );
+    }
+
+    public static Pair<String, String> splitToPair(String input, String separator){
+        return splitToPair(input, separator, Function.identity(), Function.identity());
+    }
 }

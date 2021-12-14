@@ -14,7 +14,7 @@ public class Day3 {
         System.out.println("Day 3, Part 1 : " + part1(input)); // 3895776
 
         // Part 2
-        System.out.println("Day 2, Part 2 : " + part2(input)); // 7928162
+        System.out.println("Day 3, Part 2 : " + part2(input)); // 7928162
     }
 
     public static int part1(List<String> input) {

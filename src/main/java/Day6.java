@@ -23,5 +23,4 @@ public class Day6 {
         }
         return Arrays.stream(data).sum();
     }
-
 }

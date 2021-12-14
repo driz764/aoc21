@@ -11,7 +11,7 @@ public class Day5 {
     public static void main(String[] args) throws IOException {
         List<Move> input = getMoves("day_5.txt");
         System.out.println("Day 5, part 1 : " + part1(input)); //  6397
-        System.out.println("Day 5, part 2 : " + solve(input)); // 22335
+        System.out.println("Day 5, part 2 : " + solve2(input)); // 22335
     }
 
     public record Move(Vector origin, Vector direction, int distance) {
