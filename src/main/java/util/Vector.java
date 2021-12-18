@@ -62,6 +62,10 @@ public record Vector(int x, int y, int z) {
         return Math.abs(x);
     }
 
+    public int distNoDiag(Vector o) {
+        return Math.abs(x - o.x) + Math.abs(y - o.y);
+    }
+
     public Vector normlike() {
         if (x == 0) return new Vector(0, y / Math.abs(y));
         if (y == 0) return new Vector(x / Math.abs(x), 0);
