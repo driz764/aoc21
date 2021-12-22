@@ -1,5 +1,6 @@
 package util;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +21,9 @@ public record Vector(int x, int y, int z) {
 
     public static Vector fromString(String s) {
         String[] split = s.split(",");
-        return new Vector(Integer.parseInt(split[0]), Integer.parseInt(split[1]));
+        if (split.length == 2)
+            return new Vector(Integer.parseInt(split[0]), Integer.parseInt(split[1]));
+        return new Vector(Integer.parseInt(split[0]), Integer.parseInt(split[1]), Integer.parseInt(split[2]));
     }
 
     public Vector negate() {
@@ -47,10 +50,12 @@ public record Vector(int x, int y, int z) {
     }
 
     public static void printMatrix(Map<Vector, Boolean> data, String present, String absent) {
+        var minX = data.keySet().stream().map(Vector::x).mapToInt(Integer::intValue).min().getAsInt();
+        var minY = data.keySet().stream().map(Vector::y).mapToInt(Integer::intValue).min().getAsInt();
         var maxX = data.keySet().stream().map(Vector::x).mapToInt(Integer::intValue).max().getAsInt();
         var maxY = data.keySet().stream().map(Vector::y).mapToInt(Integer::intValue).max().getAsInt();
-        for (int y = 0; y < maxY + 1; y++) {
-            for (int x = 0; x < maxX + 1; x++) {
+        for (int y = minY; y < maxY + 1; y++) {
+            for (int x = minX; x < maxX + 1; x++) {
                 System.out.print(data.getOrDefault(new Vector(x, y), false) ? present : absent);
             }
             System.out.println();
@@ -66,6 +71,10 @@ public record Vector(int x, int y, int z) {
         return Math.abs(x - o.x) + Math.abs(y - o.y);
     }
 
+    public int dist3D(Vector o){
+        return Math.abs(x - o.x) + Math.abs(y - o.y) + Math.abs(z - o.z);
+    }
+
     public Vector normlike() {
         if (x == 0) return new Vector(0, y / Math.abs(y));
         if (y == 0) return new Vector(x / Math.abs(x), 0);
@@ -74,5 +83,13 @@ public record Vector(int x, int y, int z) {
 
     public Vector mul(int i) {
         return new Vector(x * i, y * i);
+    }
+
+    public static Pair<Vector, Vector> minMax(Collection<Vector> in) {
+        var minX = in.stream().map(Vector::x).mapToInt(Integer::intValue).min().getAsInt();
+        var minY = in.stream().map(Vector::y).mapToInt(Integer::intValue).min().getAsInt();
+        var maxX = in.stream().map(Vector::x).mapToInt(Integer::intValue).max().getAsInt();
+        var maxY = in.stream().map(Vector::y).mapToInt(Integer::intValue).max().getAsInt();
+        return new Pair<>(new Vector(minX,minY), new Vector(maxX,maxY));
     }
 }

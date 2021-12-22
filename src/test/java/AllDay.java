@@ -90,4 +90,24 @@ public class AllDay {
     public void day17() throws IOException {
         Day17.main(empty);
     }
+
+    @Test
+    public void day18() throws IOException {
+        Day18.main(empty);
+    }
+
+    @Test
+    public void day19() throws IOException {
+        Day19.main(empty);
+    }
+
+    @Test
+    public void day20() throws IOException {
+        Day20.main(empty);
+    }
+
+    @Test
+    public void day21() throws IOException {
+        Day21.main(empty);
+    }
 }

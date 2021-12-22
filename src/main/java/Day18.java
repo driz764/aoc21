@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.stream.Stream;
 
 public class Day18 {
@@ -191,4 +192,5 @@ public class Day18 {
             return Integer.toString(val);
         }
     }
+
 }
